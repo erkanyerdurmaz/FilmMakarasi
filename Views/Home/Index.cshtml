@@ -1,0 +1,118 @@
+@model IEnumerable<Film>
+
+@{
+	Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <style>
+    *{
+      font-family: 'Poppins', sans-serif;
+       -webkit-user-select: none;
+        -moz-user-select: -moz-none;
+        -o-user-select: none;
+        user-select: none;
+    }
+    img {
+        -webkit-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        user-drag: none;
+    }
+    img {
+      pointer-events: none;
+    }
+    .movie_card{
+      padding: 0 !important;
+      width: 22rem;
+      margin:14px; 
+      border-radius: 10px;
+      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    }
+    .movie_card img{
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      height: 33rem;
+    }
+    .movie_info{
+      color: #5e5c5c;
+    }
+
+    .movie_info i{
+      font-size: 20px;
+    }
+    .card-title{
+      width: 80%;
+      height: 4rem;
+    }
+    .play_button{
+      background-color: #ff3d49;
+        position: absolute;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      right: 20px;
+      bottom: 111px;
+      font-size: 27px;
+      padding-left: 21px;
+      padding-top: 16px;
+      color: #FFFFFF;
+      cursor: pointer;
+    }
+
+    .credits{
+      margin-top: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 2px solid #8e24aa;
+      font-size: 18px;
+    }
+    .credits .card-body{
+      padding: 0;
+    }
+    .credits p{
+      padding-top: 15px;
+      padding-left: 18px;
+    }
+    .credits .card-body i{
+      color: #8e24aa;
+    }
+  </style>
+<div class="container">
+	<div class="page">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="slider">
+					<ul class="slides">
+						@foreach (var item in Model)
+						{
+							<li><a href="#"><img src="\resimler\@item.Resimler.FirstOrDefault()?.DosyaAdi"  style="height:600px !important;"  /></a></li>
+						}
+					</ul>
+				</div>
+			</div>
+
+
+
+	
+			@foreach (var item in Model)
+			{
+				<div class="col-md-4">
+				<div class="card movie_card">
+					
+     <a asp-action="FilmElestirisi" asp-controller="Home" asp-route-id="@item.Id"><img src="\resimler\@item.Resimler.FirstOrDefault()?.DosyaAdi" class="card-img-top" /></a>
+      <div class="card-body">
+       
+        <h5 class="card-title">@item.Ad</h5>
+         
+         
+      </div>
+    </div>
+	</div>
+			}
+			
+			
+		 <!-- .row -->
+		</div>
+</div>
+</div>

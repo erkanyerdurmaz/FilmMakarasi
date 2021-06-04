@@ -1,0 +1,27 @@
+@model Film 
+@inject FilmMakarasi.Data.FilmMakarasiContext _context
+
+@*
+<span class="text-danger font-weight-bold">@Model.Ad</span> Ürününün Kategorileri
+<hr>
+<ul>
+@foreach (var item in Model.Kategorileri)
+{
+    <li>@item.Adi</li>
+}
+
+</ul>*@
+
+@*------------------------------------------------------------------------------------------------------------------*@
+
+<span class="text-danger font-weight-bold">@Model.Ad</span> Filminin Kategorileri
+<hr>
+
+@foreach (var item in Model.Kategorileri)
+{
+    <div class="custom-control custom-checkbox">
+  <input type="checkbox" class="custom-control-input" id="cb_@item.Id"@(Model.Kategorileri.Contains(item)?"checked":"")>
+  <label class="custom-control-label" for="cb_@item.Id">@item.Adi</label>
+</div>
+}
+

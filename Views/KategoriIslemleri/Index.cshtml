@@ -1,0 +1,54 @@
+@model IEnumerable<Kategori> //Model ---> List<Kategori>
+
+    @{
+    ViewData["Title"] = "Index";
+}
+
+    <div class="jumbotron">
+        <h1 class="text-info">Kategori Yönetimi</h1>
+    </div>
+
+    <p>
+        <a asp-action="Create" class="btn btn-outline-info"><i class="fas fa-plus"></i> Yeni Kategori</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                @Html.DisplayNameFor(model => model.Adi)
+                </th>
+                <th>
+                @Html.DisplayNameFor(model => model.Aciklama)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        { //Model (Kategoriler Listesi) ----> item(Kategori)
+                <tr>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Adi)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Aciklama)
+                    </td>
+                    <td>
+                    @if (Context.Session.GetString("Turu") == "Admin" || Context.Session.GetString("Turu") == "User")
+                    {
+                            <a class="btn btn-outline-secondary btn-sm" asp-action="Edit" asp-route-id="@item.Id"><i
+                            class="far fa-edit"></i> Düzenle</a>
+                            <a class="btn btn-outline-secondary btn-sm" asp-action="Details" asp-route-id="@item.Id"><i
+                            class="far fa-file-alt"></i> Detay</a>
+                            <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id"><i
+                            class="far fa-trash-alt"></i> Sil</a>
+                            <a class="btn btn-outline-primary btn-sm ml-3" asp-action="KategorininFilmleri"
+                        asp-controller="FilmIslemleri" asp-route-id="@item.Id"><i class="fas fa-barcode"></i> Film
+                                Yönetimi</a>
+                    }
+                    </td>
+                </tr>
+        }
+        </tbody>
+    </table>

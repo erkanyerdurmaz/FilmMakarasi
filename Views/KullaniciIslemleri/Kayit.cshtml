@@ -1,0 +1,39 @@
+@model Kullanici
+
+@{
+    ViewData["Title"] = "Giris";
+}
+
+<h4>Lütfen kayıt bilgilerinizi giriniz.</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Kayit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="KAdi" class="control-label"></label>
+                <input asp-for="KAdi" class="form-control" />
+                <span asp-validation-for="KAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sifre" class="control-label"></label>
+                <input asp-for="Sifre" class="form-control" />
+                <span asp-validation-for="Sifre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SifreTekrar" class="control-label"></label>
+                <input asp-for="SifreTekrar" class="form-control" />
+                <span asp-validation-for="SifreTekrar" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Kayıt" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

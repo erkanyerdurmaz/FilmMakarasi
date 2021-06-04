@@ -1,0 +1,45 @@
+@model FilmMakarasi.Models.Film
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="jumbotron">
+    <h1>Film Detayları</h1>
+</div>
+
+<div>
+    <dl class="row">
+        <div class="col-4">
+            <h4 class="text-primary">Özellikleri</h4>
+            <hr />
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Ad)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Ad)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Aciklama)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Aciklama)
+            </dd>
+            
+        </div>
+
+        <div class="col-6">
+            <h4 class="text-danger">Resim</h4>
+            <hr />
+            @foreach (var item in Model.Resimler)
+            {
+                <img src="\resimler\@item.DosyaAdi" style="max-height: 100px;" class="img-thumbnail"/>
+            }
+
+        </div>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a> |
+    <a asp-action="Index">Film Listesine Dön</a>
+</div>

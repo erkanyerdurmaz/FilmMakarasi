@@ -1,0 +1,71 @@
+@model IEnumerable<Film>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="jumbotron">
+    <h1 class="text-primary">Film İşlemleri</h1>
+    @{ var kategori = ViewBag.Kategori as Kategori;}
+
+    <p class="text-danger">@(kategori?.Adi??"Tüm Kategoriler")</p>
+    @* <p class="text-danger">@(ViewBag.Kategori?.Adi??"Tüm Kategoriler")</p> *@
+    @* <p class="text-danger">(@ViewBag.KategoriAdi)</p> *@
+    @* <small>@kategori?.Aciklama</small> *@
+</div>
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-success" asp-route-id=@kategori?.Id><i class="fas fa-plus"></i> Film Ekle</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Resim) *@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aciklama)
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {  //Model --> Filmler Listesi
+        <tr>
+            <td>
+                @* @foreach (var res in item.Resimler)
+                {
+                    <img src="\resimler\@res.DosyaAdi" style="max-height: 20px;"/>
+                } *@
+
+                @if (item.Resimler.FirstOrDefault() == null)
+                {
+                    <img src="\resimler\resimyok.jpg" style="max-height: 50px;"/>
+                    
+                }
+                else
+                {
+                    <img src="\resimler\@item.Resimler.FirstOrDefault()?.DosyaAdi" style="max-height: 50px;"/>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aciklama)
+            </td>
+           
+            <td>
+                <a class="btn btn-outline-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id"><i class="far fa-edit"></i> Düzenle</a>
+                <a class="btn btn-outline-secondary btn-sm"  asp-action="Details" asp-route-id="@item.Id"><i class="far fa-file-alt"></i> Detay</a>
+                <a class="btn btn-outline-danger btn-sm"  asp-action="Delete" asp-route-id="@item.Id"><i class="far fa-trash-alt"></i> Sil</a>
+                 <a class="btn btn-outline-info btn-sm ml-3"  asp-action="KategorileriniAyarla" asp-route-id="@item.Id"><i class="far fa-list"></i> Kategorileri</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
